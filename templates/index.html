@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuisine Explorer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            background-image: url('https://www.shutterstock.com/shutterstock/photos/287683409/display_1500/stock-photo-blank-cookbook-and-spices-on-wooden-table-287683409.jpg');
+           
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 1em;
+        }
+
+        .search-form {
+            margin-top: 2em;
+        }
+
+        .search-form input[type="text"],
+        .search-form select {
+            padding: 15px;
+            width: 300px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+        }
+
+        .search-form button {
+            padding: 15px 30px;
+            background-color: #ff6347;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+
+        .search-form button:hover {
+            background-color: #e5533d;
+        }
+
+        /* Featured Recipes Section */
+        .featured-recipes {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .featured-recipes h2 {
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+
+        .recipe-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .recipe-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 15px;
+            max-width: 300px;
+        }
+
+        .recipe-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .recipe-card h3 {
+            padding: 10px;
+        }
+
+        .recipe-card a {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 10px;
+            background-color: #ff6347;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .recipe-card a:hover {
+            background-color: #e5533d;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div>
+            <h1>Cuisine Explorer</h1>
+            <p>Discover delicious recipes from around the world</p>
+
+            <form class="search-form" action="/" method="POST">
+                <input type="text" name="cuisine" placeholder="Cuisine Type (e.g., Italian)">
+                <input type="text" name="dietary" placeholder="Dietary Restrictions">
+                <input type="text" name="ingredients" placeholder="Ingredients">
+                <button type="submit">Search Recipes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Featured Recipes Section -->
+    <section class="featured-recipes">
+        <h2>Featured Recipes</h2>
+        <div class="recipe-cards">
+            {% if featured_recipes %}
+                {% for recipe in featured_recipes %}
+                <div class="recipe-card">
+                    <img src="{{ recipe['image'] }}" alt="{{ recipe['title'] }}">
+                    <h3>{{ recipe['title'] }}</h3>
+                    <a href="{{ url_for('view_recipe', recipe_id=recipe['id']) }}">View Recipe</a>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No featured recipes available at the moment.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Cuisine Explorer</p>
+    </footer>
+
+</body>
+</html>
+

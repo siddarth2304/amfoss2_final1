@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ recipe.title }}</title>
+    <style>
+        /* Basic styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .recipe {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .recipe img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .nutrition {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="recipe">
+        <h1>{{ recipe.title }}</h1>
+        <img src="{{ recipe.image }}" alt="{{ recipe.title }}">
+        <p>{{ recipe.summary | safe }}</p>
+        
+        <!-- Nutrition Information -->
+        <div class="nutrition">
+            <h2>Nutrition Facts</h2>
+            <p>Calories: {{ nutrition.calories }}</p>
+            <p>Carbohydrates: {{ nutrition.carbs }}</p>
+            <p>Protein: {{ nutrition.protein }}</p>
+            <p>Fat: {{ nutrition.fat }}</p>
+        </div>
+    </div>
+</body>
+</html>
+

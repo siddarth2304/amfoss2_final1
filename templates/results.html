@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+        .recipe-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .recipe-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            text-align: center;
+        }
+        .recipe-item img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .recipe-item button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .recipe-item button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <div class="recipe-list">
+        {% for recipe in recipes %}
+        <div class="recipe-item">
+            <img src="{{ recipe['image'] }}" alt="{{ recipe['title'] }}">
+            <h2>{{ recipe['title'] }}</h2>
+            <a href="{{ url_for('view_recipe', recipe_id=recipe['id']) }}">
+                <button>View Recipe</button>
+            </a>
+            <form action="{{ url_for('add_favorite') }}" method="POST">
+                <input type="hidden" name="recipe_name" value="{{ recipe['title'] }}">
+                <input type="hidden" name="recipe_image" value="{{ recipe['image'] }}">
+                <input type="hidden" name="recipe_url" value="{{ recipe['sourceUrl'] }}">
+                
+                <!-- Pass dietary restrictions and ingredients -->
+                <input type="hidden" name="dietary_restrictions" value="{{ request.args.get('dietary') }}">
+                <input type="hidden" name="ingredients" value="{{ request.args.get('ingredients') }}">
+                
+                <button type="submit">Save to Favorites</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+

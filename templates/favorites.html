@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Favorites</title>
+    <style>
+        /* Basic styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+        }
+        .favorite-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .favorite-item {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+        }
+        .favorite-item img {
+            width: 100px; /* Set a fixed size for images */
+            height: auto;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+        .favorite-item h2 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        .favorite-item button {
+            margin-top: 10px;
+        }
+        .no-favorites {
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Favorites</h1>
+    <div class="favorite-list">
+        {% if favorites %}
+            {% for favorite in favorites %}
+                <div class="favorite-item">
+                    <img src="{{ favorite.recipe_image }}" alt="{{ favorite.recipe_name }}">
+                    <div>
+                        <h2>{{ favorite.recipe_name }}</h2>
+                        <a href="{{ favorite.recipe_url }}">
+                            <button>View Recipe</button>
+                        </a>
+                        <form action="{{ url_for('delete_favorite', favorite_id=favorite.id) }}" method="POST">
+                            <button type="submit">Remove from Favorites</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-favorites">No favorites added yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+
