@@ -15,7 +15,7 @@ Cuisine Explorer is a web application built using Flask that helps users discove
 
 ## Screenshots 📸
 
-<img src="path_to_screenshot1" alt="Cuisine Explorer Homepage" width="400">
+<img src="screenshots/Screenshot from 2024-10-24 23-02-13.png" alt="Cuisine Explorer Homepage" width="400">
 <img src="path_to_screenshot2" alt="Recipe Results" width="400">
 
 ## Technologies Used 💻
